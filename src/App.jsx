@@ -22,6 +22,20 @@ function App() {
         tie: 0
     });
 
+    useEffect(() => {
+        fetchScores();
+    }, []);
+
+    const fetchScores = async () => {
+        const response = await fetch('/api/scores');
+        const data = await response.json();
+        setScores({
+            x:data.score.find(score => score.id === 'X').score,
+            o:data.score.find(score => score.id === 'O').score,
+            tie:data.score.find(score => score.id === 'tie').score
+        })
+    }
+
     const resetGame = () => {
         setBoard(Array(9).fill(null));
         setCurrentPlayer('X');

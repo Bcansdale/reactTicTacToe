@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import CheckWinner from "./GameLogic/CheckWinner.jsx";
 import PlayerSelect from "./PlayerSelect.jsx";
-import PlayResetButtons from "./PlayResetButtons.jsx";
-import ScoreBoard from "./ScoreBoard.jsx";
+import ScoreHandler from "../../server/scoreHandler.js";
 
 function GameBoard({board, setBoard, currentPlayer, setCurrentPlayer, winner, setWinner, scores, setScores, onGameFinish, onResetScores}) {
     // const [board, setBoard] = useState(Array(9).fill(null)); // 3x3 grid, initially empty
@@ -23,6 +22,10 @@ function GameBoard({board, setBoard, currentPlayer, setCurrentPlayer, winner, se
         const winnerResult = CheckWinner(newBoard);
         if (winnerResult) {
             setWinner(winnerResult);
+            setScores((prevScores) => ({
+                ...prevScores,
+                [winnerResult]: prevScores[winnerResult]
+            }))
         } else {
             // Switch to the next player
             setCurrentPlayer(currentPlayer === 'X' ? 'O' : 'X');
