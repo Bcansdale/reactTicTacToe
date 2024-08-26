@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import axios from "axios";
 
 function PlayResetButtons({ onGameFinish, onResetScores }) {
     const [play, setPlay] = useState(false);
@@ -21,7 +22,7 @@ function PlayResetButtons({ onGameFinish, onResetScores }) {
         setCancel(true);
     };
 
-    const handleOkayClick = () => {
+    const handleOkayClick = async () => {
         setPlay(false);
         setReset(false);
         setConfirm(false);
@@ -32,6 +33,13 @@ function PlayResetButtons({ onGameFinish, onResetScores }) {
         }
         if (onResetScores) {
             onResetScores(); // Reset the scores
+        }
+
+        try {
+            const response = await axios.post('/api/resetscores');
+            console.log('Scores have been reset:', response.data);
+        } catch (error) {
+            console.error('Error resetting scores:', error);
         }
     };
 

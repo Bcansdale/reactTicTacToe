@@ -25,6 +25,18 @@ const ScoreHandler = {
             message: 'Score updated',
             score: SCORE_DATA
         });
+    },
+
+    resetScores: (req, res) => {
+        console.log("POST /api/resetscores request received");
+
+        // Reset all scores to 0
+        SCORE_DATA.forEach(score => score.score = 0);
+
+        res.send({
+            message: 'Scores have been reset',
+            score: SCORE_DATA
+        });
     }
 }
 

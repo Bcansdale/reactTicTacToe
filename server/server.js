@@ -13,6 +13,7 @@ app.use(express.json())
 
 app.get('/api/scores', scoreHandler.getScores)
 app.post('/api/updatescores', scoreHandler.saveScores)
+app.post('/api/resetscores', scoreHandler.resetScores);
 
 
 ViteExpress.config({ printViteDevServerHost: true });
