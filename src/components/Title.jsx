@@ -1,5 +1,8 @@
 import React from 'react';
 
+
+// This is the title
+// This page is only for styling
 function Title() {
     return (
         <div className="row">

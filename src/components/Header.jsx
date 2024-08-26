@@ -1,10 +1,10 @@
 import React from 'react';
-import {useState, useEffect} from "react";
 
-function handleHomeClick(res, req) {
-    fetch('/api/scores')
 
-}
+// This function doesnt do anything yet but would return to home page for other ganes
+// function handleHomeClick(res, req) {
+//     fetch('/api/scores')
+// }
 
 function Header({home, login}) {
     return (

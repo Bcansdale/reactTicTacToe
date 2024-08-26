@@ -1,4 +1,4 @@
-
+// Check winner logic from past tic-tac-toe game
 
 function CheckWinner(squares) {
     const lines = [
