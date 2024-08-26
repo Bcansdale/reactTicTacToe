@@ -16,10 +16,9 @@ const ScoreHandler = {
     saveScores : (req, res) => {
         const {winner} = req.body;
 
-        if (winner === 'X' || winner === 'O') {
-            SCORE_DATA.find((score) => score.id === winner).score++
-        } else if (winner === 'tie') {
-            SCORE_DATA.find((score) => score.id === 'tie').score++
+        const scoreToUpdate = SCORE_DATA.find((score) => score.id === winner);
+        if (scoreToUpdate) {
+            scoreToUpdate.score++;
         }
 
         res.send({

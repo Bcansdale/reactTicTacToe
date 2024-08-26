@@ -54,7 +54,7 @@ function App() {
 
     return (
         <>
-            <div className="container mx-auto mt-5 border-2 border-black rounded-4">
+            <div className="container mx-auto mt-3 border-2 border-black rounded-4">
                 <div className="container mt-2">
                     <Header/>
                     <Title/>

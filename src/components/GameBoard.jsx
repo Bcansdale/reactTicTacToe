@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import CheckWinner from "./GameLogic/CheckWinner.jsx";
 import PlayerSelect from "./PlayerSelect.jsx";
 import ScoreHandler from "../../server/scoreHandler.js";
+import axios from "axios";
 
 function GameBoard({board, setBoard, currentPlayer, setCurrentPlayer, winner, setWinner, scores, setScores, onGameFinish, onResetScores}) {
     // const [board, setBoard] = useState(Array(9).fill(null)); // 3x3 grid, initially empty
@@ -25,12 +26,22 @@ function GameBoard({board, setBoard, currentPlayer, setCurrentPlayer, winner, se
             setScores((prevScores) => ({
                 ...prevScores,
                 [winnerResult]: prevScores[winnerResult]
-            }))
+            }));
+            saveScoreToServer(winnerResult)
         } else {
             // Switch to the next player
             setCurrentPlayer(currentPlayer === 'X' ? 'O' : 'X');
         }
     };
+
+    const saveScoreToServer = async (winner) => {
+        try {
+            const response = await axios.post('/api/updatescores', {winner});
+            console.log('Server response:', response.data);
+        } catch (error) {
+            console.log('Error saving score:', error)
+        }
+    }
 
     // // Reset the game board
     // const resetGame = () => {
